@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Física Aplicada - Dayana Ushiña</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f1115;
+            --bg-darker: #07080a;
+            --accent: #d4af37;
+            --accent-glow: rgba(212, 175, 55, 0.4);
+            --text-main: #f0f0f0;
+            --text-muted: #9ba1a6;
+            --glass-bg: rgba(20, 22, 27, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --border-radius: 16px;
+            --ease: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-darker);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* --- Header / Hero --- */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+            opacity: 0.35;
+            z-index: -2;
+            animation: slowZoom 30s infinite alternate linear;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 20%, var(--bg-darker) 100%);
+            z-index: -1;
+        }
+
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        .hero-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 1200px;
+            z-index: 2;
+        }
+
+        .header-seal {
+            height: 120px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.6));
+            transition: transform 0.3s ease;
+        }
+
+        .header-seal:hover {
+            transform: scale(1.05);
+        }
+
+        .header-titles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-titles h1 {
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-titles h2 {
+            color: var(--accent);
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* --- Uniform Grid Layout --- */
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- Uniform Cards --- */
+        .card {
+            position: relative;
+            background: var(--bg-dark);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+            display: flex;
+            flex-direction: column;
+            height: 320px;
+            /* Tamaño fijo e igual para todas */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+            z-index: 10;
+        }
+
+        .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s var(--ease), filter 0.5s ease;
+            z-index: 1;
+        }
+
+        .card:hover .bg-img {
+            transform: scale(1.1);
+            filter: brightness(0.6);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(15, 17, 21, 0.98) 100%);
+            z-index: 2;
+            transition: opacity 0.4s ease;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        .card-header {
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.4s var(--ease);
+        }
+
+        .card:hover .card-header {
+            transform: translateY(0);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #b4b9be;
+            font-weight: 300;
+        }
+
+        /* --- Links Container (Slide Up on Hover) --- */
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s var(--ease), opacity 0.5s var(--ease), margin 0.4s var(--ease);
+        }
+
+        .card:hover .links-container {
+            max-height: 180px;
+            opacity: 1;
+        }
+
+        .links-container.scrollable {
+            overflow-y: auto;
+        }
+
+        .links-container.scrollable::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .links-container.scrollable::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .link-pill {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #fff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .link-pill::after {
+            content: '↗';
+            margin-left: 6px;
+            opacity: 0.5;
+            font-family: sans-serif;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .link-pill:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .link-pill:hover::after {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        /* Enlace completo para tarjetas de un solo link */
+        .full-card-link {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+        }
+
+        .card-single:hover .link-pill {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .card-single:hover .link-pill::after {
+            opacity: 1;
+            transform: translate(2px, -2px);
+        }
+
+        /* Indicator icon for hover */
+        .hover-indicator {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            opacity: 0.7;
+            transition: all 0.4s var(--ease);
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-indicator::before {
+            content: '+';
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .card:hover .hover-indicator {
+            opacity: 1;
+            transform: rotate(45deg);
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .card:hover .hover-indicator::before {
+            color: #000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-header-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .header-seal {
+                height: 90px;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .header-titles h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+            }
+
+            .card {
+                height: 300px;
+            }
+
+            .card-header {
+                transform: translateY(0);
+            }
+
+            .links-container {
+                max-height: 180px;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-header-row">
+            <!-- Logo Izquierdo: UCE -->
+            <img src="img/UCE.png" class="header-seal" alt="Sello Universidad Central del Ecuador">
+
+            <!-- Títulos en el centro -->
+            <div class="header-titles">
+                <h1>PORTAFOLIO DE FÍSICA</h1>
+                <h2>Dayana Ushiña - QUINTO B</h2>
+            </div>
+
+            <!-- Logo Derecho: Facultad -->
+            <img src="img/FILOSOFIA.png" class="header-seal"
+                alt="Sello Facultad de Filosofía, Letras y Ciencias de la Educación"
+                style="background: rgba(255,255,255,0.9); border-radius: 50%; padding: 5px;">
+        </div>
+
+        <p style="max-width: 800px; font-size: 1.1rem; color: #d1d5db; font-weight: 300; z-index: 2; margin-top: 1rem;">
+            Evidenciando el proceso de aprendizaje en Física.</p>
+    </header>
+
+    <main class="grid-container">
+
+        <!-- 1. Información Personal -->
+        <article class="card card-single">
+            <a href="https://drive.google.com/file/d/1_2WPeT-9_QCkO1iOTFChTfq72Y3HwgBw/view?usp=drive_link"
+                target="_blank" class="full-card-link" aria-label="Abrir CV"></a>
+            <div class="bg-img"
+                style="background-image: url('https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/669376783_3541701992665389_3611482771785818139_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1153&ctp=s2048x1153&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEfFUGeztC2ee81dUqxz6BJ42X4Z91owZjjZfhn3WjBmHB62SZ4rdDXxeokBCb3_v5-ni590zLm0XSoe4hwozE9&_nc_ohc=Xrp-OexodhIQ7kNvwE23FVW&_nc_oc=AdpmLmrgTvl6f40IKk0jGebkm_oxyKAY2uk6OYkoSicLp5Z_uQZulinNsgQi7dbX9I8&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=tkTHYtBW3npX7af6L-oJNA&_nc_ss=7b2a8&oh=00_AQBupjmcENAoO_IqorZl0vPyah6QvS3Q1yG8nRBnjoGqhg&oe=6A53A944');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Información Personal</h3>
+                    <p class="card-desc">Hoja de vida</p>
+                </div>
+                <div class="links-container">
+                    <span class="link-pill">Hoja de Vida </span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 2. Sílabo -->
+        <article class="card card-single">
+            <a href="https://drive.google.com/file/d/1_PA8nMbfJf7d3oJO1xXZJy74d682a9N3/view" target="_blank"
+                class="full-card-link" aria-label="Abrir Sílabo"></a>
+            <div class="bg-img"
+                style="background-image: url('https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?auto=format&fit=crop&q=80&w=800');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Sílabo</h3>
+                    <p class="card-desc">Documento guía con los contenidos, objetivos y planificación de la asignatura.
+                    </p>
+                </div>
+                <div class="links-container">
+                    <span class="link-pill">Ver Sílabo</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 3. Trabajos Individuales -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=800');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Trabajos Individuales</h3>
+                    <p class="card-desc">Recopilación de tareas, ejercicios prácticos de vectores, cinemática y
+                        dinámica.</p>
+                </div>
+                <div class="links-container scrollable">
+                    <a href="https://drive.google.com/file/d/11I0_uucmC7uFLRW6A-9p-K0MdYRe4p49/view?usp=drive_link"
+                        target="_blank" class="link-pill">Ensayo</a>
+                    <a href="https://drive.google.com/file/d/1KjOC9nQ-SfFCO203r31_lrAbyY5KIs9n/view?usp=drive_link"
+                        target="_blank" class="link-pill">Ejercicios de conversión</a>
+                    <a href="https://drive.google.com/file/d/1LTnAsI-NR0lQBFc4t2PBg4KMAjAlUtVM/view" target="_blank"
+                        class="link-pill">Vectores 2D</a>
+                    <a href="https://drive.google.com/file/d/17IXSVVjtgDLCvzdHZJpfaFM-NGM-K353/view" target="_blank"
+                        class="link-pill">Vectores 3D</a>
+                    <a href="https://drive.google.com/file/d/1kwrDdO0TN2qJ3cHwiT8Iqgsn-4SdtxKb/view?usp=sharing"
+                        target="_blank" class="link-pill">Ensayo 2</a>
+                    <a href="https://drive.google.com/file/d/1Dbq4xL6jLywjv50gwW77KiL3rftugS14/view?usp=sharing"
+                        target="_blank" class="link-pill">Ejercicios de MCU-MCUA</a>
+                    <a href="https://drive.google.com/file/d/1uqcuxApophnJem7CCGkFV6EcthdmYzyf/view?usp=drive_link"
+                        target="_blank" class="link-pill">Movimiento parabólico</a>
+                    <a href="#" target="_blank" class="link-pill">Fuerza de rozamiento</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 4. Mapas Conceptuales -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTrbK5IVsj1Yc9sODI-1Z8298gedV5D7zCO0dF3LkEy8MSuIUTD0wc1EI&s=10');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Mapas Mentales</h3>
+                    <p class="card-desc">Organizadores gráficos que sintetizan las leyes fundamentales y fórmulas de la
+                        física.</p>
+                </div>
+                <div class="links-container scrollable">
+                    <a href="https://drive.google.com/file/d/1r4u-CgBMAaXu9xjzXiqXROXOgxPEe4H0/view" target="_blank"
+                        class="link-pill">Sistema Internacional</a>
+                    <a href="https://drive.google.com/file/d/1Nq3-fqwwtaac2-31MQ9H7S2cJmWNkTiN/view" target="_blank"
+                        class="link-pill">Trigonometría</a>
+                    <a href="https://drive.google.com/file/d/1Gm46JhmDhBcqmw-NhPcPqfOeOic8k5ep/view" target="_blank"
+                        class="link-pill">Vectores</a>
+                    <a href="https://drive.google.com/file/d/1qFl-baiD79K2ojC4diTuK-SwZk5GCwED/view?usp=drive_link"
+                        target="_blank" class="link-pill">Cinemática</a>
+                    <a href="https://drive.google.com/file/d/1Hm4OJJwEWG78c_f1vbrBnnXzUJLAn6QQ/view?usp=drive_link"
+                        target="_blank" class="link-pill">Movimiento Circular</a>
+                    <a href="https://drive.google.com/file/d/1GLi4a0xyd--ltkvaU-akstufhLgt0dUt/view?usp=drive_link"
+                        target="_blank" class="link-pill">Ecuaciones horarias</a>
+                    <a href="#" target="_blank" class="link-pill">Dinámica</a>
+                    <a href="#" target="_blank" class="link-pill">Máquinas Simples</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 5. Trabajos Grupales -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://scontent.fuio5-1.fna.fbcdn.net/v/t39.30808-6/638601147_2692721914447033_2062220050687171358_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x720&ctp=s1280x720&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeFkU573_k0uMaRxiQRLbuJfb35RKgdxEytvflEqB3ETK8U3cuYcFReK2FUJozXRQcX-iVzOP68RKyFyuIla2nIJ&_nc_ohc=fJHECqkeC5oQ7kNvwEWdCd7&_nc_oc=AdrlDkYvDgDUygD99bDeyCK60cfYbybkZSQ2ilIv7EXpHZWf6_Xi4P8ypihDr2MgvKg&_nc_zt=23&_nc_ht=scontent.fuio5-1.fna&_nc_gid=_NrK06MordFCBxUHF2hbFA&_nc_ss=7b2a8&oh=00_AQBRoUmph8gj3aZQvIBzKgBRmqihfvylwlHmmUgj3syLBA&oe=6A538B98');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Trabajos Grupales</h3>
+                    <p class="card-desc">Proyectos colaborativos y resolución de retos en equipo.</p>
+                </div>
+                <div class="links-container">
+                    <a href="https://drive.google.com/file/d/1H4lrSFrQi5stUu411v1QWIFfZRhkqzfO/view" target="_blank"
+                        class="link-pill">Maqueta Vectores</a>
+                    <a href="https://drive.google.com/file/d/1a0XkCODCqciFCdWXsKLv9uFbfP-HUkbQ/view" target="_blank"
+                        class="link-pill">Prueba Grupal Vectores</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 6. Ensayos: El Cosmos -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Ensayos: El Cosmos</h3>
+                    <p class="card-desc">Análisis y reflexiones críticas sobre las lecturas del cosmos.</p>
+                </div>
+                <div class="links-container scrollable">
+                    <a href="https://drive.google.com/file/d/1SAVn4i0nhitHbJoRJAVha_Ib-LBlaZ3-/view?usp=drive_link"
+                        target="_blank" class="link-pill">Capítulo 1</a>
+                    <a href="https://drive.google.com/file/d/175vIAE2Tx2v-vJqF1ZOVNnd7RsGALQBW/view?usp=sharing"
+                        target="_blank" class="link-pill">Capítulo 2</a>
+                    <a href="https://drive.google.com/file/d/1Yy_YdYlVNPEn4lI3eDyugG0uT9iXHv8N/view?usp=sharing"
+                        target="_blank" class="link-pill">Capítulo 3</a>
+                    <a href="#" target="_blank" class="link-pill">Capítulo 4</a>
+                    <a href="#" target="_blank" class="link-pill">Capítulo 5</a>
+                    <a href="#" target="_blank" class="link-pill">Capítulo 6</a>
+                    <a href="#" target="_blank" class="link-pill">Capítulo 7</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 7. Pruebas -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=800');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Pruebas</h3>
+                    <p class="card-desc">Evaluaciones del aula virtual.</p>
+                </div>
+                <div class="links-container">
+                    <a href="https://drive.google.com/file/d/1M6rjWpdXfd-LVrCxQ72djipuXB_smXBX/view?usp=sharing"
+                        target="_blank" class="link-pill">Evidencia de pruebas</a>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- 8. Informes de Laboratorio -->
+        <article class="card">
+            <div class="bg-img"
+                style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=800');">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Informes de Laboratorio</h3>
+                    <p class="card-desc">Reportes detallados de las prácticas experimentales y comprobaciones físicas.
+                    </p>
+                </div>
+                <div class="links-container scrollable">
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 1</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 2</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 3</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 4</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 5</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 6</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 7</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 8</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 9</a>
+                    <a href="#" target="_blank" class="link-pill">Laboratorio 10</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 9. Vocabulario -->
+        <article class="card card-single">
+            <a href="https://drive.google.com/file/d/1zTs2r_xWuQ8uglJQrA2L4sSnWy-W41Ln/view?usp=drive_link"
+                target="_blank" class="full-card-link" aria-label="Abrir Vocabulario"></a>
+            <div class="bg-img"
+                style="background-image: url('https://img.magnific.com/vector-gratis/ilustracion-literatura-dibujada-mano_23-2149290085.jpg?semt=ais_hybrid&w=740&q=80'); filter: grayscale(50%);">
+            </div>
+            <div class="overlay"></div>
+            <div class="hover-indicator"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">Vocabulario</h3>
+                    <p class="card-desc">Glosario técnico con los términos clave utilizados durante el semestre.</p>
+                </div>
+                <div class="links-container">
+                    <span class="link-pill">Ver Vocabulario</span>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Portafolio de Física Aplicada - Dayana Ushiña</p>
+    </footer>
+
+</body>
+
+</html>
